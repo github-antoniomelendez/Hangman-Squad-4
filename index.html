@@ -2,8 +2,8 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Advanced Hangman</title>
 
   <link rel="stylesheet" href="style.css">
@@ -17,6 +17,7 @@
 
     <!-- Difficulty Selection -->
     <div class="difficulty-section">
+
       <button class="difficulty easy" onclick="setDifficulty('easy')">
         EASY
       </button>
@@ -28,16 +29,18 @@
       <button class="difficulty hard" onclick="setDifficulty('hard')">
         HARD
       </button>
+
     </div>
 
     <!-- Timer -->
     <div class="timer" id="timer">
-      Time Left: --
+      No Time Limit
     </div>
 
     <!-- Game Area -->
     <div class="game-area">
 
+      <!-- Hangman -->
       <div class="hangman-box">
 
         <div class="gallows"></div>
@@ -51,6 +54,7 @@
 
       </div>
 
+      <!-- Wrong Letters -->
       <div class="wrong-guesses">
         <h3>Incorrect Guesses</h3>
         <p id="wrongLetters"></p>
@@ -59,28 +63,39 @@
     </div>
 
     <!-- Word Display -->
-    <div class="word-display" id="wordDisplay"></div>
+    <div class="word-display" id="wordDisplay">
+    </div>
 
     <!-- Keyboard -->
-    <div class="keyboard" id="keyboard"></div>
+    <div class="keyboard" id="keyboard">
+    </div>
 
     <!-- Restart -->
-    <button id="restartBtn">Play Again</button>
+    <button id="restartBtn">
+      Play Again
+    </button>
 
-    <!-- Message -->
+    <!-- End Game Message -->
     <div class="message hidden" id="messageBox">
+
       <h2 id="messageTitle"></h2>
-      <p>The word was: <span id="finalWord"></span></p>
+
+      <p>
+        The word was:
+        <span id="finalWord"></span>
+      </p>
+
     </div>
 
   </div>
 
-  <!-- Win Sound -->
+  <!-- WIN SOUND -->
   <audio id="winSound">
     <source src="https://assets.mixkit.co/sfx/preview/mixkit-winning-chimes-2015.mp3" type="audio/mpeg">
   </audio>
 
   <script src="script.js"></script>
+
 </body>
 
 </html>
