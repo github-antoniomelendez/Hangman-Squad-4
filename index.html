@@ -1,33 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Hangman Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Advanced Hangman</title>
 
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
   <div class="container">
 
     <h1>HANGMAN</h1>
 
+    <!-- Difficulty Selection -->
+    <div class="difficulty-section">
+      <button class="difficulty easy" onclick="setDifficulty('easy')">
+        EASY
+      </button>
+
+      <button class="difficulty medium" onclick="setDifficulty('medium')">
+        MEDIUM
+      </button>
+
+      <button class="difficulty hard" onclick="setDifficulty('hard')">
+        HARD
+      </button>
+    </div>
+
+    <!-- Timer -->
+    <div class="timer" id="timer">
+      Time Left: --
+    </div>
+
+    <!-- Game Area -->
     <div class="game-area">
 
       <div class="hangman-box">
-        <div class="gallows">
-          <div class="pole"></div>
-          <div class="top-bar"></div>
-          <div class="rope"></div>
 
-          <div class="head hidden"></div>
-          <div class="body hidden"></div>
-          <div class="left-arm hidden"></div>
-          <div class="right-arm hidden"></div>
-          <div class="left-leg hidden"></div>
-          <div class="right-leg hidden"></div>
-        </div>
+        <div class="gallows"></div>
+
+        <div class="head hidden"></div>
+        <div class="body hidden"></div>
+        <div class="left-arm hidden"></div>
+        <div class="right-arm hidden"></div>
+        <div class="left-leg hidden"></div>
+        <div class="right-leg hidden"></div>
+
       </div>
 
       <div class="wrong-guesses">
@@ -37,14 +58,16 @@
 
     </div>
 
-    <div class="word-display" id="wordDisplay">
-      _ _ _ _ _
-    </div>
+    <!-- Word Display -->
+    <div class="word-display" id="wordDisplay"></div>
 
+    <!-- Keyboard -->
     <div class="keyboard" id="keyboard"></div>
 
-    <button id="restartBtn">Restart Game</button>
+    <!-- Restart -->
+    <button id="restartBtn">Play Again</button>
 
+    <!-- Message -->
     <div class="message hidden" id="messageBox">
       <h2 id="messageTitle"></h2>
       <p>The word was: <span id="finalWord"></span></p>
@@ -52,6 +75,12 @@
 
   </div>
 
+  <!-- Win Sound -->
+  <audio id="winSound">
+    <source src="https://assets.mixkit.co/sfx/preview/mixkit-winning-chimes-2015.mp3" type="audio/mpeg">
+  </audio>
+
   <script src="script.js"></script>
 </body>
+
 </html>
