@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Advanced Hangman</title>
+  <title>Advanced Hangman Game</title>
 
   <link rel="stylesheet" href="style.css">
 </head>
@@ -40,24 +40,34 @@
     <!-- Game Area -->
     <div class="game-area">
 
-      <!-- Hangman -->
+      <!-- Hangman Drawing -->
       <div class="hangman-box">
 
         <div class="gallows"></div>
 
+        <div class="rope hidden"></div>
+
         <div class="head hidden"></div>
+
         <div class="body hidden"></div>
+
         <div class="left-arm hidden"></div>
+
         <div class="right-arm hidden"></div>
+
         <div class="left-leg hidden"></div>
+
         <div class="right-leg hidden"></div>
 
       </div>
 
       <!-- Wrong Letters -->
       <div class="wrong-guesses">
+
         <h3>Incorrect Guesses</h3>
+
         <p id="wrongLetters"></p>
+
       </div>
 
     </div>
@@ -70,7 +80,7 @@
     <div class="keyboard" id="keyboard">
     </div>
 
-    <!-- Restart -->
+    <!-- Restart Button -->
     <button id="restartBtn">
       Play Again
     </button>
@@ -89,9 +99,9 @@
 
   </div>
 
-  <!-- WIN SOUND -->
-  <audio id="winSound">
-    <source src="https://assets.mixkit.co/sfx/preview/mixkit-winning-chimes-2015.mp3" type="audio/mpeg">
+  <!-- Winning Sound -->
+  <audio id="winSound" preload="auto">
+    <source src="winningsound.wav" type="audio/wav">
   </audio>
 
   <script src="script.js"></script>

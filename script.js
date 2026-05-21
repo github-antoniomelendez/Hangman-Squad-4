@@ -4,7 +4,10 @@ const words = [
   "KOTLIN",
   "ANDROID",
   "COMPUTER",
-  "PROGRAMMING"
+  "PROGRAMMING",
+  "DEVELOPER",
+  "SOFTWARE",
+  "KEYBOARD"
 ];
 
 let selectedWord = "";
@@ -43,12 +46,12 @@ const restartBtn =
 const winSound =
   document.getElementById("winSound");
 
-// Hangman body parts
+// Body Parts
 const bodyParts = document.querySelectorAll(
-  ".head, .body, .left-arm, .right-arm, .left-leg, .right-leg"
+  ".rope, .head, .body, .left-arm, .right-arm, .left-leg, .right-leg"
 );
 
-// Difficulty Selection
+// Difficulty
 function setDifficulty(level) {
 
   difficulty = level;
@@ -79,24 +82,18 @@ function startGame() {
 
   clearInterval(timer);
 
-  // Hide message
   messageBox.classList.add("hidden");
 
-  // Reset body parts
   bodyParts.forEach(part => {
     part.classList.add("hidden");
   });
 
-  // Reset wrong letters
   wrongLettersText.textContent = "";
 
-  // Create keyboard
   createKeyboard();
 
-  // Update word display
   updateWordDisplay();
 
-  // Timer
   if (difficulty !== "easy") {
     startTimer();
   }
@@ -107,7 +104,7 @@ function startGame() {
   }
 }
 
-// Timer Function
+// Timer
 function startTimer() {
 
   updateTimerDisplay();
@@ -129,7 +126,7 @@ function startTimer() {
   }, 1000);
 }
 
-// Update Timer Display
+// Timer Display
 function updateTimerDisplay() {
 
   const minutes =
@@ -144,7 +141,7 @@ function updateTimerDisplay() {
       .padStart(2, "0")}`;
 }
 
-// Word Display
+// Update Word
 function updateWordDisplay() {
 
   const display =
@@ -159,26 +156,34 @@ function updateWordDisplay() {
 
   wordDisplay.textContent = display;
 
-  // WIN CONDITION
+  // Win Condition
   if (!display.includes("_")) {
 
-    // PLAY WIN SOUND
-    winSound.currentTime = 0;
+    try {
 
-    winSound.play()
-      .then(() => {
-        console.log("Winning sound played");
-      })
-      .catch(error => {
-        console.log("Audio blocked:", error);
-      });
+      winSound.pause();
+
+      winSound.currentTime = 0;
+
+      const playPromise =
+        winSound.play();
+
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {});
+      }
+
+    }
+
+    catch (error) {
+      console.log(error);
+    }
 
     showMessage("YOU WIN!");
 
   }
 }
 
-// Create Keyboard
+// Keyboard
 function createKeyboard() {
 
   keyboard.innerHTML = "";
@@ -193,10 +198,12 @@ function createKeyboard() {
 
     button.textContent = letter;
 
-    button.addEventListener("click",
+    button.addEventListener(
+      "click",
       () => {
         handleGuess(letter, button);
-      });
+      }
+    );
 
     keyboard.appendChild(button);
   }
@@ -226,7 +233,8 @@ function handleGuess(letter, button) {
 
     showBodyPart();
 
-    if (wrongLetters.length === 6) {
+    // Lose Condition
+    if (wrongLetters.length === 7) {
 
       showMessage("GAME OVER");
 
@@ -237,37 +245,39 @@ function handleGuess(letter, button) {
 // Show Body Part
 function showBodyPart() {
 
-  bodyParts[wrongLetters.length - 1]
-    .classList.remove("hidden");
+  bodyParts[
+    wrongLetters.length - 1
+  ].classList.remove("hidden");
 
 }
 
-// End Game Message
+// Show End Message
 function showMessage(message) {
 
   clearInterval(timer);
 
-  messageTitle.textContent = message;
+  messageTitle.textContent =
+    message;
 
   finalWord.textContent =
     selectedWord;
 
   messageBox.classList.remove("hidden");
 
-  // Disable keyboard
   const buttons =
     keyboard.querySelectorAll("button");
 
   buttons.forEach(button => {
     button.disabled = true;
   });
+
 }
 
-// Restart Game
+// Restart
 restartBtn.addEventListener(
   "click",
   startGame
 );
 
-// Start Default Game
+// Default Start
 setDifficulty("easy");
