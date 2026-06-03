@@ -37,6 +37,12 @@
       No Time Limit
     </div>
 
+    <!-- High Score -->
+    <div class="high-score">
+      High Score:
+      <span id="highScore">0</span>
+    </div>
+
     <!-- Game Area -->
     <div class="game-area">
 
@@ -72,6 +78,18 @@
 
     </div>
 
+    <!-- Category -->
+    <div class="category-display">
+      Category:
+      <span id="categoryText"></span>
+    </div>
+
+    <!-- Hint Display -->
+    <div class="hint-display">
+      Hint:
+      <span id="hintText">None</span>
+    </div>
+
     <!-- Word Display -->
     <div class="word-display" id="wordDisplay">
     </div>
@@ -83,6 +101,10 @@
     <!-- Restart Button -->
     <button id="restartBtn">
       Play Again
+    </button>
+
+    <button id="hintBtn">
+      Show Hint
     </button>
 
     <!-- End Game Message -->
@@ -102,6 +124,11 @@
   <!-- Winning Sound -->
   <audio id="winSound" preload="auto">
     <source src="winningsound.wav" type="audio/wav">
+  </audio>
+
+  <!-- Losing Sound -->
+  <audio id="loseSound" preload="auto">
+    <source src="losingsound.wav" type="audio/wav">
   </audio>
 
   <script src="script.js"></script>

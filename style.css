@@ -115,6 +115,80 @@ h1 {
 }
 
 /* =========================
+   HIGH SCORE
+========================= */
+
+.high-score {
+
+    font-size: 28px;
+
+    font-weight: bold;
+
+    color: #1b2a41;
+
+    margin-bottom: 20px;
+}
+
+/* =========================
+   CATEGORY DISPLAY
+========================= */
+
+.category-display {
+
+    font-size: 28px;
+
+    font-weight: bold;
+
+    color: #324a5f;
+
+    margin-bottom: 20px;
+}
+
+/* =========================
+   HINT DISPLAY
+========================= */
+
+.hint-display {
+
+    font-size: 24px;
+
+    font-weight: bold;
+
+    color: #ff9800;
+
+    margin-bottom: 20px;
+}
+
+#hintBtn {
+
+    margin-top: 15px;
+
+    padding: 12px 25px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #ff9800;
+
+    color: white;
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+    box-shadow:
+        0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+#hintBtn:hover {
+
+    transform: scale(1.05);
+}
+
+/* =========================
    GAME AREA
 ========================= */
 
