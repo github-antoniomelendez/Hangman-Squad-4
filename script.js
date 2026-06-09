@@ -140,8 +140,10 @@ let score = 0;
 let highScore =
   localStorage.getItem("highScore") || 0;
 
+let multiplayerMode = false;
+
 // =========================
-// ELEMENTS
+// DOM ELEMENTS
 // =========================
 
 const wordDisplay =
@@ -185,6 +187,15 @@ const hintBtn =
 
 const hintText =
   document.getElementById("hintText");
+
+const customWordInput =
+  document.getElementById("customWord");
+
+const multiplayerBtn =
+  document.getElementById("multiplayerBtn");
+
+const scoreText =
+  document.getElementById("scoreText");
 
 // =========================
 // BODY PARTS
@@ -265,30 +276,6 @@ function formatCategory(category) {
 
 function updateHighScore() {
 
-  let points =
-    selectedWord.length * 10;
-
-  // Difficulty Bonus
-  if (difficulty === "medium") {
-
-    points += 20;
-  }
-
-  else if (difficulty === "hard") {
-
-    points += 50;
-  }
-
-  // Mistake Penalty
-  points -= wrongLetters.length * 5;
-
-  if (points < 0) {
-
-    points = 0;
-  }
-
-  score = points;
-
   // Save High Score
   if (score > highScore) {
 
@@ -301,11 +288,6 @@ function updateHighScore() {
 
     highScoreText.textContent =
       highScore;
-  }
-
-  if (hintBtn.disabled) {
-
-    points -= 15;
   }
 
 }
@@ -342,31 +324,54 @@ function setDifficulty(level) {
 
 function startGame() {
 
-  // Random Category
-  const categoryNames =
-    Object.keys(categories);
+  if (multiplayerMode) {
 
-  selectedCategory =
-    categoryNames[
-      Math.floor(Math.random() * categoryNames.length)
-    ];
+    selectedWord =
+      customWordInput.value
+        .toUpperCase()
+        .trim();
 
-  // Random Word
-  const categoryWords =
-    categories[selectedCategory];
+    selectedCategory =
+      "Multiplayer";
 
-  selectedWord =
-    categoryWords[
-      Math.floor(Math.random() * categoryWords.length)
-    ];
+    categoryText.textContent =
+      "Multiplayer";
+  }
 
-  // Display Category
-  categoryText.textContent =
-    formatCategory(selectedCategory);
+  else {
+
+    // Random Category
+    const categoryNames =
+      Object.keys(categories);
+
+    selectedCategory =
+      categoryNames[
+        Math.floor(Math.random() * categoryNames.length)
+      ];
+
+    // Random Word
+    const categoryWords =
+      categories[selectedCategory];
+
+    selectedWord =
+      categoryWords[
+        Math.floor(Math.random() * categoryWords.length)
+      ];
+
+    // Display Category
+    categoryText.textContent =
+      formatCategory(selectedCategory);
+
+  }
 
   guessedLetters = [];
 
   wrongLetters = [];
+
+  score = 0;
+
+  scoreText.textContent =
+    score;
 
   clearInterval(timer);
 
@@ -381,7 +386,7 @@ function startGame() {
   wrongLettersText.textContent = "";
 
   hintText.textContent =
-  "None";
+    "None";
 
   hintBtn.disabled = false;
 
@@ -466,13 +471,46 @@ function updateWordDisplay() {
   wordDisplay.textContent =
     display;
 
-  // Win Condition
+  // =========================
+  // WIN CONDITION
+  // =========================
+
   if (!display.includes("_")) {
 
+    // Difficulty Bonus
+    if (difficulty === "medium") {
+
+      score += 25;
+    }
+
+    else if (difficulty === "hard") {
+
+      score += 50;
+    }
+
+    // Hint Penalty
+    if (hintBtn.disabled) {
+
+      score -= 15;
+    }
+
+    // Prevent Negative Score
+    if (score < 0) {
+
+      score = 0;
+    }
+
+    // Update Score Display
+    scoreText.textContent =
+      score;
+
+    // Update High Score
     updateHighScore();
 
+    // Play Win Sound
     playSound(winSound);
 
+    // Show Win Message
     showMessage("YOU WIN!");
   }
 
@@ -519,22 +557,46 @@ function handleGuess(letter, button) {
 
   button.disabled = true;
 
-  // Correct Guess
+  // =========================
+  // CORRECT GUESS
+  // =========================
+
   if (selectedWord.includes(letter)) {
 
     if (!guessedLetters.includes(letter)) {
 
       guessedLetters.push(letter);
+
+      // Add Score
+      score += 10;
+
+      scoreText.textContent =
+        score;
     }
 
     updateWordDisplay();
 
   }
 
-  // Wrong Guess
+  // =========================
+  // WRONG GUESS
+  // =========================
+
   else {
 
     wrongLetters.push(letter);
+
+    // Remove Score
+    score -= 5;
+
+    // Prevent Negative Score
+    if (score < 0) {
+
+      score = 0;
+    }
+
+    scoreText.textContent =
+      score;
 
     wrongLettersText.textContent =
       wrongLetters.join(", ");
@@ -545,6 +607,8 @@ function handleGuess(letter, button) {
     if (wrongLetters.length === 7) {
 
       playSound(loseSound);
+
+      updateHighScore();
 
       showMessage("GAME OVER");
     }
@@ -632,6 +696,42 @@ restartBtn.addEventListener(
 );
 
 // =========================
+// MULTIPLAYER BUTTON
+// =========================
+
+multiplayerBtn.addEventListener(
+  "click",
+  () => {
+
+    const customWord =
+      customWordInput.value
+        .trim()
+        .toUpperCase();
+
+    // Validation
+    if (
+      customWord === "" ||
+      !/^[A-Z]+$/.test(customWord)
+    ) {
+
+      alert(
+        "Enter a valid word using letters only."
+      );
+
+      return;
+    }
+
+    multiplayerMode = true;
+
+    startGame();
+
+    // Clear input
+    customWordInput.value = "";
+
+  }
+);
+
+// =========================
 // HINT BUTTON
 // =========================
 
@@ -651,4 +751,5 @@ hintBtn.addEventListener(
 // DEFAULT START
 // =========================
 
+multiplayerMode = false;
 setDifficulty("easy");

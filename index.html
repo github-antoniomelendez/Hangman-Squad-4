@@ -2,11 +2,15 @@
 <html lang="en">
 
 <head>
+
   <meta charset="UTF-8">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Advanced Hangman Game</title>
 
   <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
@@ -32,6 +36,17 @@
 
     </div>
 
+    <!-- MULTIPLAYER SECTION -->
+    <div class="multiplayer-section">
+
+      <input type="password" id="customWord" placeholder="Player 1 Enter Word">
+
+      <button id="multiplayerBtn">
+        Multiplayer
+      </button>
+
+    </div>
+
     <!-- Timer -->
     <div class="timer" id="timer">
       No Time Limit
@@ -41,6 +56,12 @@
     <div class="high-score">
       High Score:
       <span id="highScore">0</span>
+    </div>
+
+    <!-- Current Score -->
+    <div class="current-score">
+      Score:
+      <span id="scoreText">0</span>
     </div>
 
     <!-- Game Area -->
@@ -98,14 +119,20 @@
     <div class="keyboard" id="keyboard">
     </div>
 
-    <!-- Restart Button -->
-    <button id="restartBtn">
-      Play Again
-    </button>
+    <!-- Buttons -->
+    <div class="button-section">
 
-    <button id="hintBtn">
-      Show Hint
-    </button>
+      <!-- Restart Button -->
+      <button id="restartBtn">
+        Play Again
+      </button>
+
+      <!-- Hint Button -->
+      <button id="hintBtn">
+        Show Hint
+      </button>
+
+    </div>
 
     <!-- End Game Message -->
     <div class="message hidden" id="messageBox">
@@ -123,12 +150,16 @@
 
   <!-- Winning Sound -->
   <audio id="winSound" preload="auto">
+
     <source src="winningsound.wav" type="audio/wav">
+
   </audio>
 
   <!-- Losing Sound -->
   <audio id="loseSound" preload="auto">
+
     <source src="losingsound.wav" type="audio/wav">
+
   </audio>
 
   <script src="script.js"></script>

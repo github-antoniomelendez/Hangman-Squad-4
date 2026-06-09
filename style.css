@@ -115,7 +115,7 @@ h1 {
 }
 
 /* =========================
-   HIGH SCORE
+    SCORE
 ========================= */
 
 .high-score {
@@ -127,6 +127,17 @@ h1 {
     color: #1b2a41;
 
     margin-bottom: 20px;
+}
+
+.current-score {
+
+    font-size: 26px;
+
+    font-weight: bold;
+
+    color: #4caf50;
+
+    margin-bottom: 15px;
 }
 
 /* =========================
@@ -587,4 +598,58 @@ h1 {
 
     box-shadow:
         0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* =========================
+   MULTIPLAYER
+========================= */
+
+.multiplayer-section {
+
+    margin-bottom: 25px;
+
+    display: flex;
+
+    gap: 10px;
+
+    justify-content: center;
+}
+
+#customWord {
+
+    padding: 12px;
+
+    font-size: 18px;
+
+    border-radius: 10px;
+
+    border: 2px solid #1b2a41;
+
+    width: 250px;
+
+    text-transform: uppercase;
+}
+
+#multiplayerBtn {
+
+    padding: 12px 20px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #9c27b0;
+
+    color: white;
+
+    font-size: 18px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+#multiplayerBtn:hover {
+
+    transform: scale(1.05);
 }
