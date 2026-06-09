@@ -197,6 +197,27 @@ const multiplayerBtn =
 const scoreText =
   document.getElementById("scoreText");
 
+const finalScore =
+  document.getElementById("finalScore");
+
+const finalHighScore =
+  document.getElementById("finalHighScore");
+
+const finalCategory =
+  document.getElementById("finalCategory");
+
+const finalWrongGuesses =
+  document.getElementById("finalWrongGuesses");
+
+const finalDifficulty =
+  document.getElementById("finalDifficulty");
+
+const finalHintUsed =
+  document.getElementById("finalHintUsed");
+
+const finalMode =
+  document.getElementById("finalMode");
+
 // =========================
 // BODY PARTS
 // =========================
@@ -643,8 +664,35 @@ function showMessage(message) {
   finalWord.textContent =
     selectedWord;
 
+  // Summary Info
+  finalScore.textContent =
+    score;
+
+  finalHighScore.textContent =
+    highScore;
+
+  finalCategory.textContent =
+    categoryText.textContent;
+
+  finalWrongGuesses.textContent =
+    wrongLetters.length;
+
+  finalDifficulty.textContent =
+    difficulty.toUpperCase();
+
+  finalHintUsed.textContent =
+    hintBtn.disabled
+      ? "YES"
+      : "NO";
+
+  finalMode.textContent =
+    multiplayerMode
+      ? "MULTIPLAYER"
+      : "SINGLE PLAYER";
+
   messageBox.classList.remove("hidden");
 
+  // Disable Keyboard
   const buttons =
     keyboard.querySelectorAll("button");
 
